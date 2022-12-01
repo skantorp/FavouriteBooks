@@ -16,6 +16,7 @@ namespace Books.BusinessLogic.RequestHandlers
         {
             var bookToDelete = await _bookRepository.GetOne(x => x.Id == request.Id);
             await _bookRepository.Remove(bookToDelete);
+            await _bookRepository.SaveChanges();
 
             return request.Id;
         }

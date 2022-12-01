@@ -11,8 +11,8 @@ namespace Books.BusinessLogic.Requests
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public string[] Author { get; set; }
         public string[] Notes { get; set; }
+        public Guid AuthorId { get; set; }
         public Guid GenreId { get; set; }
         public Guid StatusId { get; set; }
     }

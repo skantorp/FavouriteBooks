@@ -9,7 +9,6 @@ namespace Books.DataAccessLayer.Interfaces
 {
     public interface IAuthorRepository: IRepository<Author>
     {
-        Task<List<Author>> GetAllAuthors();
         Task<List<Author>> GetAllAuthors(string name);
     }
 }

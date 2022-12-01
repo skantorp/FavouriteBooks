@@ -28,25 +28,10 @@ namespace Books.BusinessLogic.RequestHandlers
             {
                 Name = request.Name,
                 GenreId = request.GenreId,
-                StatusId = request.StatusId
+                StatusId = request.StatusId,
+                AuthorId = request.AuthorId
             };
 
-            foreach (var authorName in request.Authors)
-            {
-                var author = await _authorRepository.GetOne(x => x.Name == authorName);
-                if (author == null)
-                {
-                    author = new Author
-                    {
-                        Name = authorName
-                    };
-                    newBook.Authors.Add(new BookAuthor
-                    {
-                        Author = author,
-                        Book = newBook
-                    });
-                }
-            }
             foreach (var note in request.Notes)
             {
                 newBook.Notes.Add(new Note

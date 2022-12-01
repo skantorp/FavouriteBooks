@@ -22,6 +22,10 @@ namespace Books.DataAccessLayer.EntitiesConfigurations
             builder.HasOne(x => x.Status)
                 .WithMany(x => x.Books)
                 .HasForeignKey(x => x.StatusId);
+
+            builder.HasOne(x => x.Author)
+                .WithMany(x => x.Books)
+                .HasForeignKey(x => x.AuthorId);
         }
     }
 }

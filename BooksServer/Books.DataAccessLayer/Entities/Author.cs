@@ -10,7 +10,7 @@ namespace Books.DataAccessLayer.Entities
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public ICollection<BookAuthor> Books { get; set; }
-        = new List<BookAuthor>();
+        public ICollection<Book> Books { get; set; }
+        = new List<Book>();
     }
 }

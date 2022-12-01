@@ -16,12 +16,6 @@ namespace Books.DataAccessLayer.Repositories
         {
         }
 
-        public Task<List<Author>> GetAllAuthors()
-        {
-            return _dbSet
-                .ToListAsync();
-        }
-
         public Task<List<Author>> GetAllAuthors(string name)
         {
             return _dbSet

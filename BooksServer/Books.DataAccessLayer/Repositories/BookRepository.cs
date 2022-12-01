@@ -14,8 +14,7 @@ namespace Books.DataAccessLayer.Repositories
         public override async Task<Book> GetOne(Expression<Func<Book, bool>> predicate)
         {
             var entity = await _dbSet
-                .Include(x => x.Authors)
-                .ThenInclude(x => x.Author)
+                .Include(x => x.Author)
                 .Include(x => x.Notes)
                 .Where(predicate)
                 .SingleOrDefaultAsync();
@@ -28,8 +27,7 @@ namespace Books.DataAccessLayer.Repositories
             IQueryable<Book> books = _dbSet
                 .Include(x => x.Status)
                 .Include(x => x.Genre)
-                .Include(x => x.Authors)
-                .ThenInclude(x => x.Author);
+                .Include(x => x.Author);
 
             if (!string.IsNullOrEmpty(name))
             {
@@ -38,12 +36,12 @@ namespace Books.DataAccessLayer.Repositories
 
             if (authorNames.Any())
             {
-                books = books.Where(x => x.Authors.Select(y => y.Author.Name).Intersect(authorNames).Any());
+                books = books.Where(x => authorNames.Contains(x.Author.Name));
             }
 
             if (genres.Any())
             {
-                books = books.Where(x => genres.Any(y => x.Genre.Name.ToLower() == y.ToLower()));
+                books = books.Where(x => authorNames.Any(y => x.Author.Name.ToLower() == y.ToLower()));
             }
 
             if (statuses.Any())
@@ -61,8 +59,7 @@ namespace Books.DataAccessLayer.Repositories
             IQueryable<Book> books = _dbSet
                 .Include(x => x.Status)
                 .Include(x => x.Genre)
-                .Include(x => x.Authors)
-                .ThenInclude(x => x.Author);
+                .Include(x => x.Author);
 
             return books
                 .OrderBy(x => x.Name)

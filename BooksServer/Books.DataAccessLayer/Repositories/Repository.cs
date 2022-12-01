@@ -1,5 +1,7 @@
 ﻿using Books.DataAccessLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace Books.DataAccessLayer.Repositories;
@@ -22,6 +24,12 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
             .SingleOrDefaultAsync();
 
         return entity;
+    }
+
+    public Task<List<TEntity>> GetAll()
+    {
+        return _dbSet
+            .ToListAsync();
     }
 
     public virtual Task Add(TEntity entity)

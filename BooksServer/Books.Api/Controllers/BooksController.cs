@@ -21,6 +21,27 @@ namespace Books.Api.Controllers
         {
             var tt = await _mediator.Send(new GetAllBooksRequest());
             return tt;
+        }       
+
+        [HttpPost]
+        public async Task<Guid> Create(CreateBookRequest createBookRequest)
+        {
+            var result = await _mediator.Send(createBookRequest);
+            return result;
+        }
+
+        [HttpPut]
+        public async Task<Guid> Update(UpdateBookRequest updateBookRequest)
+        {
+            var result = await _mediator.Send(updateBookRequest);
+            return result;
+        }
+
+        [HttpDelete]
+        public async Task<Guid> Delete(DeleteBookRequest deleteBookRequest)
+        {
+            var result = await _mediator.Send(deleteBookRequest);
+            return result;
         }
     }
 }
