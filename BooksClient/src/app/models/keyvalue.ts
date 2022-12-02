@@ -1,6 +1,6 @@
-import { Guid } from "guid-typescript";
+import { Guid } from 'guid-typescript';
 
 export class KeyValue {
-    id?: Guid;
-    name!: string;
+  id?: Guid;
+  name?: string;
 }

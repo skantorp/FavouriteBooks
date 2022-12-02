@@ -15,6 +15,10 @@ namespace Books.BusinessLogic.RequestHandlers
     {
         private readonly IBookRepository _bookRepository;
         private readonly IAuthorRepository _authorRepository;
+        public CreateBookRequestHandler()
+        {
+
+        }
 
         public CreateBookRequestHandler(IAuthorRepository authorRepository, IBookRepository bookRepository)
         {

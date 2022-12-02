@@ -1,36 +1,84 @@
-<p-dialog [(visible)]="visible" [style]="{width: '450px'}" header="Product Details" [modal]="true" styleClass="p-fluid" (onHide)="hideDialog()">
-    <ng-template pTemplate="content">
-        <div class="field">
-            <label for="name">Name</label>
-            <input type="text" pInputText id="name" [(ngModel)]="book.name" required autofocus />
-            <small class="p-error" *ngIf="submitted && !book.name">Name is required.</small>
-        </div>
-        <div class="field">
-            <label>Author</label>
-            <p-dropdown [options]="authors" [(ngModel)]="book.author" optionLabel="name"></p-dropdown>
-            <small class="p-error" *ngIf="submitted && !book.author">Author is required.</small>
-        </div>
-        <div class="field">
-            <label>Status</label>
-            <p-dropdown [options]="statuses" [(ngModel)]="book.status" optionLabel="name"></p-dropdown>
-            <small class="p-error" *ngIf="submitted && !book.status">Status is required.</small>
-        </div>
-        <div class="field">
-            <label>Genre</label>
-            <p-dropdown [options]="genres" [(ngModel)]="book.genre" optionLabel="name"></p-dropdown>
-            <small class="p-error" *ngIf="submitted && !book.genre">Genre is required.</small>
-        </div>
-        <div class="field">
-            <label>Notes</label>
-            <br>
-            <textarea pInputTextarea id="notes" [(ngModel)]="book.notes"></textarea>
-        </div>
-    </ng-template>
+<p-dialog
+  [(visible)]="visible"
+  [style]="{ width: '450px' }"
+  header="Product Details"
+  [modal]="true"
+  styleClass="p-fluid"
+  (onHide)="hideDialog()"
+>
+  <ng-template pTemplate="content">
+    <div class="field">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        pInputText
+        id="name"
+        [(ngModel)]="book.name"
+        required
+        autofocus
+      />
+      <small class="p-error" *ngIf="submitted && !book.name"
+        >Name is required.</small
+      >
+    </div>
+    <div class="field">
+      <label>Author</label>
+      <p-dropdown
+        [options]="authors"
+        [(ngModel)]="book.author"
+        optionLabel="name"
+      ></p-dropdown>
+      <small class="p-error" *ngIf="submitted && !book.author"
+        >Author is required.</small
+      >
+    </div>
+    <div class="field">
+      <label>Status</label>
+      <p-dropdown
+        [options]="statuses"
+        [(ngModel)]="book.status"
+        optionLabel="name"
+      ></p-dropdown>
+      <small class="p-error" *ngIf="submitted && !book.status"
+        >Status is required.</small
+      >
+    </div>
+    <div class="field">
+      <label>Genre</label>
+      <p-dropdown
+        [options]="genres"
+        [(ngModel)]="book.genre"
+        optionLabel="name"
+      ></p-dropdown>
+      <small class="p-error" *ngIf="submitted && !book.genre"
+        >Genre is required.</small
+      >
+    </div>
+    <div class="field">
+      <label>Notes</label>
+      <br />
+      <textarea pInputTextarea id="notes" [(ngModel)]="book.notes"></textarea>
+    </div>
+  </ng-template>
 
-    <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="submitBookUpdating()"></button>
-    </ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Save"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="submitBookUpdating()"
+    ></button>
+  </ng-template>
 </p-dialog>
 
-<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

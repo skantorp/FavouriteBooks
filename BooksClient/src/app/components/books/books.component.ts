@@ -9,28 +9,29 @@ import { RelatedDataService } from 'src/app/services/related.data.service';
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
-  styleUrls: ['./books.component.css']
+  styleUrls: ['./books.component.css'],
 })
 export class BooksComponent implements OnInit {
-
   public books!: Book[];
   public statuses!: KeyValue[];
   public selectedBook!: Book;
   dialogVisible: boolean = false;
 
-  constructor(private bookService: BookService,
+  constructor(
+    private bookService: BookService,
     private messageService: MessageService,
-    private relatedDataService: RelatedDataService) { }
+    private relatedDataService: RelatedDataService
+  ) {}
 
   ngOnInit(): void {
     this.onTableUpdate();
-    this.relatedDataService.getStatuses().subscribe(s => {
+    this.relatedDataService.getStatuses().subscribe((s) => {
       this.statuses = s;
     });
   }
 
   onTableUpdate() {
-    this.bookService.getBooks().subscribe(b => {
+    this.bookService.getBooks().subscribe((b) => {
       this.books = b;
     });
   }
@@ -45,17 +46,21 @@ export class BooksComponent implements OnInit {
   }
 
   editBook(book: Book) {
-    this.selectedBook = {...book};
+    this.selectedBook = { ...book };
     this.dialogVisible = true;
   }
 
   deleteBook(id: Guid) {
     this.bookService.deleteBook(id).subscribe({
-      next: p => {
+      next: (p) => {
         this.onTableUpdate();
-        this.messageService.add({severity:'success', summary: 'Successful', detail: 'Book deleted', life: 3000});
-      }
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Book deleted',
+          life: 3000,
+        });
+      },
     });
   }
-
 }
