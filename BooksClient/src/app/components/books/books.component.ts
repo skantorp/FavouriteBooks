@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Guid } from 'guid-typescript';
+import { MessageService } from 'primeng/api';
 import { Book } from 'src/app/models/book';
 import { KeyValue } from 'src/app/models/keyvalue';
 import { BookService } from 'src/app/services/book.service';
+import { RelatedDataService } from 'src/app/services/related.data.service';
 
 @Component({
   selector: 'app-books',
@@ -12,13 +14,19 @@ import { BookService } from 'src/app/services/book.service';
 export class BooksComponent implements OnInit {
 
   public books!: Book[];
+  public statuses!: KeyValue[];
   public selectedBook!: Book;
   dialogVisible: boolean = false;
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService,
+    private messageService: MessageService,
+    private relatedDataService: RelatedDataService) { }
 
   ngOnInit(): void {
     this.onTableUpdate();
+    this.relatedDataService.getStatuses().subscribe(s => {
+      this.statuses = s;
+    });
   }
 
   onTableUpdate() {
@@ -42,7 +50,12 @@ export class BooksComponent implements OnInit {
   }
 
   deleteBook(id: Guid) {
-    this.bookService.deleteBook(id).subscribe();
+    this.bookService.deleteBook(id).subscribe({
+      next: p => {
+        this.onTableUpdate();
+        this.messageService.add({severity:'success', summary: 'Successful', detail: 'Book deleted', life: 3000});
+      }
+    });
   }
 
 }

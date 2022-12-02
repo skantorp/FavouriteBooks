@@ -16,7 +16,6 @@ namespace Books.DataAccessLayer.Entities
         public Genre Genre { get; set; }
         public Guid AuthorId { get; set; }
         public Author Author { get; set; }
-        public ICollection<Note> Notes { get; set; }
-        = new List<Note>();
+        public string? Notes { get; set; }
     }
 }

@@ -38,9 +38,12 @@ namespace Books.Api.Controllers
         }
 
         [HttpDelete]
-        public async Task<Guid> Delete(DeleteBookRequest deleteBookRequest)
+        public async Task<Guid> Delete(Guid id)
         {
-            var result = await _mediator.Send(deleteBookRequest);
+            var result = await _mediator.Send(new DeleteBookRequest
+            {
+                Id = id
+            });
             return result;
         }
     }

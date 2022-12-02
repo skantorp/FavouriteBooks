@@ -25,10 +25,8 @@ export class BookService {
             statusId: book.status?.id
         });
     
-        return this.http.post<Book>(url, { 
+        return this.http.post<Book>(url, {...book, 
             authorId: book.author?.id,
-            name: book.name,
-            notes: [],
             genreId: book.genre?.id,
             statusId: book.status?.id
         });

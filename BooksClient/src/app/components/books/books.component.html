@@ -1,28 +1,32 @@
 <p-toast></p-toast>
 
 <div class="card">
-    <p-toolbar styleClass="mb-4 gap-2">
-        <ng-template pTemplate="left">
-            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-        </ng-template>
-    </p-toolbar>
-
-    <p-table #dt [value]="books" [rows]="10" [paginator]="true" [globalFilterFields]="['name','status?.name','genre?.name']" [tableStyle]="{'min-width': '75rem'}"
+    <p-table #dt [value]="books" [rows]="10" [paginator]="true" [globalFilterFields]="['name', 'author.name', 'status?.name','genre?.name']" [tableStyle]="{'min-width': '75rem'}"
         [rowHover]="true" dataKey="id" [showCurrentPageReport]="true">
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" placeholder="Search..." />
-                </span>
+                <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="name" style="min-width:15rem">Name <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="author" style="min-width:15rem">Author </th>
-                <th pSortableColumn="genre">Genre <p-sortIcon field="genre?.name"></p-sortIcon></th>
-                <th pSortableColumn="status" style="min-width:10rem">Status <p-sortIcon field="status?.name"></p-sortIcon></th>
+                <th pSortableColumn="author.name" style="min-width:15rem">Author <p-sortIcon field="author.name"></p-sortIcon></th>
+                <th>Genre</th>
+                <th style="min-width:10rem">Status</th>
+                <th></th>
+            </tr>
+            <tr>
+                <th>
+                    <p-columnFilter type="text" field="name"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="author.name"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="genre.name"></p-columnFilter>
+                </th>
+                <th></th>
                 <th></th>
             </tr>
         </ng-template>

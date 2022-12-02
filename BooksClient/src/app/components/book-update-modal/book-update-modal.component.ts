@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { Book } from 'src/app/models/book';
 import { KeyValue } from 'src/app/models/keyvalue';
 import { BookService } from 'src/app/services/book.service';
@@ -21,7 +22,8 @@ export class BookUpdateModalComponent implements OnInit {
   submitted!: boolean;
 
   constructor(private bookService: BookService,
-    private relatedDataService: RelatedDataService) { }
+    private relatedDataService: RelatedDataService,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.relatedDataService.getAuthors().subscribe(a => {
@@ -38,28 +40,40 @@ export class BookUpdateModalComponent implements OnInit {
   }
 
   hideDialog() {
-    console.log(this.book);
     this.onClose.emit();
+    this.submitted = false;
   }
 
   submitBookUpdating() {
-    let isBookExists = !!this.book.id;
-    if(isBookExists) {
+    this.submitted = true;
+
+    if(!this.validate()) {
+      return;
+    }
+
+    let bookExists = !!this.book.id;
+    if(bookExists) {
       this.bookService.updateBook(this.book).subscribe({
-        next: p => {
-          this.hideDialog();
-          this.onTableUpdate.emit();
-        }
+        next: p => this.afterBookUpdating(bookExists)
       });
     }
     else {
       this.bookService.createBook(this.book).subscribe({
-        next: p => {
-          this.hideDialog();
-          this.onTableUpdate.emit();
-        }
+        next: p => this.afterBookUpdating(bookExists)
       });
     }
+  }
+
+  afterBookUpdating(bookExists: boolean) {
+    let messageLabel = bookExists? 'Book updated' : 'Book created';
+
+    this.hideDialog();
+    this.messageService.add({severity:'success', summary: 'Successful', detail: messageLabel, life: 3000});
+    this.onTableUpdate.emit();
+  }
+
+  validate(): boolean {
+    return this.submitted && !!this.book.name && !!this.book.author && !!this.book.genre && !!this.book.status;
   }
 
 }

@@ -12,7 +12,6 @@ namespace Books.BusinessLogic.MappingProfiles
             CreateMap<Author, DictionaryDTO>();
             CreateMap<BookStatus, DictionaryDTO>();
             CreateMap<Genre, DictionaryDTO>();
-            CreateMap<Note, DictionaryDTO>();
             CreateMap<Book, BookDTO>();
         }
     }

@@ -5,7 +5,7 @@ export class Book {
     id?: Guid;
     name?: string;
     author?: KeyValue;
-    notes?: KeyValue[];
+    notes?: string;
     status?: KeyValue;
     genre?: KeyValue;
 }

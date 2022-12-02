@@ -15,7 +15,6 @@ namespace Books.DataAccessLayer.Repositories
         {
             var entity = await _dbSet
                 .Include(x => x.Author)
-                .Include(x => x.Notes)
                 .Where(predicate)
                 .SingleOrDefaultAsync();
 

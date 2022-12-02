@@ -8,14 +8,22 @@
         <div class="field">
             <label>Author</label>
             <p-dropdown [options]="authors" [(ngModel)]="book.author" optionLabel="name"></p-dropdown>
+            <small class="p-error" *ngIf="submitted && !book.author">Author is required.</small>
         </div>
         <div class="field">
             <label>Status</label>
             <p-dropdown [options]="statuses" [(ngModel)]="book.status" optionLabel="name"></p-dropdown>
+            <small class="p-error" *ngIf="submitted && !book.status">Status is required.</small>
         </div>
         <div class="field">
             <label>Genre</label>
             <p-dropdown [options]="genres" [(ngModel)]="book.genre" optionLabel="name"></p-dropdown>
+            <small class="p-error" *ngIf="submitted && !book.genre">Genre is required.</small>
+        </div>
+        <div class="field">
+            <label>Notes</label>
+            <br>
+            <textarea pInputTextarea id="notes" [(ngModel)]="book.notes"></textarea>
         </div>
     </ng-template>
 

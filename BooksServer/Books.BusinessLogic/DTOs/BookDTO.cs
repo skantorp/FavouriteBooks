@@ -13,7 +13,6 @@ namespace Books.BusinessLogic.DTOs
         public DictionaryDTO Status { get; set; }
         public DictionaryDTO Genre { get; set; }
         public DictionaryDTO Author { get; set; }
-        public List<DictionaryDTO> Notes { get; set; }
-        = new List<DictionaryDTO>();
+        public string? Notes { get; set; }
     }
 }

@@ -29,16 +29,9 @@ namespace Books.BusinessLogic.RequestHandlers
                 Name = request.Name,
                 GenreId = request.GenreId,
                 StatusId = request.StatusId,
-                AuthorId = request.AuthorId
+                AuthorId = request.AuthorId,
+                Notes = request.Notes
             };
-
-            foreach (var note in request.Notes)
-            {
-                newBook.Notes.Add(new Note
-                {
-                    Name = note
-                });
-            } 
 
             await _bookRepository.Add(newBook);
             await _bookRepository.SaveChanges();
