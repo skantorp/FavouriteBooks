@@ -21,9 +21,21 @@ namespace Books.BusinessLogic.RequestHandlers
 				Name = request.Name,
 				GenreId = request.GenreId,
 				StatusId = request.StatusId,
-				AuthorId = request.AuthorId,
 				Notes = request.Notes
 			};
+
+			if (request.AuthorId.HasValue)
+			{
+				newBook.AuthorId = request.AuthorId.Value;	
+			}
+			else
+			{
+				var newAuthor = new Author
+				{
+					Name = request.AuthorName
+				};
+				newBook.Author = newAuthor;
+			}
 
 			await _bookRepository.Add(newBook);
 			await _bookRepository.SaveChanges();

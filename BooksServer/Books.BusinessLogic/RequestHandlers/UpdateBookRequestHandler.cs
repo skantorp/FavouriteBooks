@@ -17,10 +17,23 @@ namespace Books.BusinessLogic.RequestHandlers
 		public async Task<Guid> Handle(UpdateBookRequest request, CancellationToken cancellationToken)
 		{
 			var book = await _bookRepository.GetOne(x => x.Id == request.Id);
+			book.Name = request.Name;
 			book.StatusId = request.StatusId;
 			book.GenreId = request.GenreId;
-			book.AuthorId = request.AuthorId;
 			book.Notes = request.Notes;
+
+			if (request.AuthorId.HasValue)
+			{
+				book.AuthorId = request.AuthorId.Value;
+			}
+			else
+			{
+				var newAuthor = new Author
+				{
+					Name = request.AuthorName
+				};
+				book.Author = newAuthor;
+			}
 
 			await _bookRepository.Update(book);
 			await _bookRepository.SaveChanges();

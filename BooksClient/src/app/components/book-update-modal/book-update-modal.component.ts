@@ -51,20 +51,22 @@ export class BookUpdateModalComponent implements OnInit {
     if (!this.validate()) {
       return;
     }
- 
+
     let bookExists = !!this.book.id;
+    let newAuthor = !this.book.author?.id;
+
     if (bookExists) {
       this.bookService.updateBook(this.book).subscribe({
-        next: (p) => this.afterBookUpdating(bookExists),
+        next: (p) => this.afterBookUpdating(bookExists, newAuthor),
       });
     } else {
       this.bookService.createBook(this.book).subscribe({
-        next: (p) => this.afterBookUpdating(bookExists),
+        next: (p) => this.afterBookUpdating(bookExists, newAuthor),
       });
     }
   }
 
-  afterBookUpdating(bookExists: boolean) {
+  afterBookUpdating(bookExists: boolean, newAuthor: boolean) {
     let messageLabel = bookExists ? 'Book updated' : 'Book created';
 
     this.hideDialog();
@@ -75,6 +77,12 @@ export class BookUpdateModalComponent implements OnInit {
       life: 3000,
     });
     this.tableUpdate.emit();
+
+    if (newAuthor) {
+      this.relatedDataService.getAuthors().subscribe((a) => {
+        this.authors = a;
+      });
+    }
   }
 
   validate(): boolean {
