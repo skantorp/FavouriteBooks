@@ -23,9 +23,9 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddDbContext<BooksDbContext>(options =>
-    options.UseSqlServer(builder.Configuration
-                    .GetConnectionString("BooksDbConnection"))
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+	options.UseSqlServer(builder.Configuration
+			.GetConnectionString("BooksDbConnection"))
+		.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
 );
 
 var app = builder.Build();
@@ -33,17 +33,17 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
 
-app.UseCors(builder =>
+app.UseCors(b =>
 {
-    builder.AllowAnyOrigin()
-           .AllowAnyMethod()
-           .AllowAnyHeader();
+	b.WithOrigins(builder.Configuration["AllowedOrigins"].Split(','))
+		.AllowAnyMethod()
+		.AllowAnyHeader();
 });
 
 app.UseAuthorization();

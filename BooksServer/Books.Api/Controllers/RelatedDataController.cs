@@ -5,35 +5,36 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Books.Api.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class RelatedDataController : ControllerBase
-    {
-        private readonly IMediator _mediator;
-        public RelatedDataController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+	[Route("api/[controller]")]
+	[ApiController]
+	public class RelatedDataController : ControllerBase
+	{
+		private readonly IMediator _mediator;
 
-        [HttpGet("authors")]
-        public async Task<List<DictionaryDTO>> GetAuthors()
-        {
-            var authors = await _mediator.Send(new GetAuthorsRequest());
-            return authors;
-        }
+		public RelatedDataController(IMediator mediator)
+		{
+			_mediator = mediator;
+		}
 
-        [HttpGet("genres")]
-        public async Task<List<DictionaryDTO>> GetGenres()
-        {
-            var genres = await _mediator.Send(new GetGenresRequest());
-            return genres;
-        }
+		[HttpGet("authors")]
+		public async Task<ActionResult<List<DictionaryDTO>>> GetAuthors()
+		{
+			var authors = await _mediator.Send(new GetAuthorsRequest());
+			return Ok(authors);
+		}
 
-        [HttpGet("statuses")]
-        public async Task<List<DictionaryDTO>> GetStatuses()
-        {
-            var statuses = await _mediator.Send(new GetStatusesRequest());
-            return statuses;
-        }
-    }
+		[HttpGet("genres")]
+		public async Task<ActionResult<List<DictionaryDTO>>> GetGenres()
+		{
+			var genres = await _mediator.Send(new GetGenresRequest());
+			return Ok(genres);
+		}
+
+		[HttpGet("statuses")]
+		public async Task<ActionResult<List<DictionaryDTO>>> GetStatuses()
+		{
+			var statuses = await _mediator.Send(new GetStatusesRequest());
+			return Ok(statuses);
+		}
+	}
 }
