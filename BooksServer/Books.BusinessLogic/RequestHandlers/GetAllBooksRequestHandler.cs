@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Books.BusinessLogic.DTOs;
 using Books.BusinessLogic.Requests;
+using Books.DataAccessLayer.Entities;
 using Books.DataAccessLayer.Interfaces;
 using MediatR;
 
@@ -8,10 +9,10 @@ namespace Books.BusinessLogic.RequestHandlers
 {
 	public class GetAllBooksRequestHandler : IRequestHandler<GetAllBooksRequest, List<BookDTO>>
 	{
-		private readonly IBookRepository _bookRepository;
+		private readonly IRepository<Book> _bookRepository;
 		private readonly IMapper _mapper;
 
-		public GetAllBooksRequestHandler(IBookRepository bookRepository, IMapper mapper)
+		public GetAllBooksRequestHandler(IRepository<Book> bookRepository, IMapper mapper)
 		{
 			_bookRepository = bookRepository;
 			_mapper = mapper;

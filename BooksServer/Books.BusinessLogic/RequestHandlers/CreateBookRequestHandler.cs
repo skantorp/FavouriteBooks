@@ -7,9 +7,9 @@ namespace Books.BusinessLogic.RequestHandlers
 {
 	public class CreateBookRequestHandler : IRequestHandler<CreateBookRequest, Guid>
 	{
-		private readonly IBookRepository _bookRepository;
+		private readonly IRepository<Book> _bookRepository;
 
-		public CreateBookRequestHandler(IBookRepository bookRepository)
+		public CreateBookRequestHandler(IRepository<Book> bookRepository)
 		{
 			_bookRepository = bookRepository;
 		}

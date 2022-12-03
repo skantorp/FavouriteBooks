@@ -15,7 +15,7 @@ export class BookUpdateModalComponent implements OnInit {
   @Input() visible: boolean = false;
   @Output() dialogClose = new EventEmitter();
   @Output() tableUpdate = new EventEmitter();
-  public authors: KeyValue[] = [{}];
+  public authors!: KeyValue[];
   public genres!: KeyValue[];
   public statuses!: KeyValue[];
   submitted!: boolean;
@@ -28,7 +28,7 @@ export class BookUpdateModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.relatedDataService.getAuthors().subscribe((a) => {
-      this.authors.concat(a);
+      this.authors = a;
     });
     this.relatedDataService.getGenres().subscribe((g) => {
       this.genres = g;
@@ -51,7 +51,7 @@ export class BookUpdateModalComponent implements OnInit {
     if (!this.validate()) {
       return;
     }
-
+ 
     let bookExists = !!this.book.id;
     if (bookExists) {
       this.bookService.updateBook(this.book).subscribe({

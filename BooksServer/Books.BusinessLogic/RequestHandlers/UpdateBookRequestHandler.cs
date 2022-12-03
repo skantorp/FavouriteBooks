@@ -1,4 +1,5 @@
 ﻿using Books.BusinessLogic.Requests;
+using Books.DataAccessLayer.Entities;
 using Books.DataAccessLayer.Interfaces;
 using MediatR;
 
@@ -6,9 +7,9 @@ namespace Books.BusinessLogic.RequestHandlers
 {
 	public class UpdateBookRequestHandler : IRequestHandler<UpdateBookRequest, Guid>
 	{
-		private readonly IBookRepository _bookRepository;
+		private readonly IRepository<Book> _bookRepository;
 
-		public UpdateBookRequestHandler(IBookRepository bookRepository)
+		public UpdateBookRequestHandler(IRepository<Book> bookRepository)
 		{
 			_bookRepository = bookRepository;
 		}

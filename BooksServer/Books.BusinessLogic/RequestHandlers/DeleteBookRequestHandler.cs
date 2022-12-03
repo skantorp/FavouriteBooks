@@ -1,4 +1,5 @@
 ﻿using Books.BusinessLogic.Requests;
+using Books.DataAccessLayer.Entities;
 using Books.DataAccessLayer.Interfaces;
 using MediatR;
 
@@ -6,9 +7,9 @@ namespace Books.BusinessLogic.RequestHandlers
 {
 	public class DeleteBookRequestHandler : IRequestHandler<DeleteBookRequest, Guid>
 	{
-		private readonly IBookRepository _bookRepository;
+		private readonly IRepository<Book> _bookRepository;
 
-		public DeleteBookRequestHandler(IBookRepository bookRepository)
+		public DeleteBookRequestHandler(IRepository<Book> bookRepository)
 		{
 			_bookRepository = bookRepository;
 		}

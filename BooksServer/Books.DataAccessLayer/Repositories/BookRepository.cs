@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Books.DataAccessLayer.Repositories
 {
-	public class BookRepository : Repository<Book>, IBookRepository
+	public class BookRepository : Repository<Book>
 	{
 		public BookRepository(BooksDbContext db) : base(db)
 		{
