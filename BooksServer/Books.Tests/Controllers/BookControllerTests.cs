@@ -3,6 +3,7 @@ using Books.Api.Controllers;
 using Books.BusinessLogic.DTOs;
 using Books.BusinessLogic.Requests;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 
 namespace Books.Tests.Controllers
@@ -28,7 +29,8 @@ namespace Books.Tests.Controllers
 
 			var result = await _sut.Get();
 
-			Assert.NotNull(result);
+			var response = Assert.IsType<OkObjectResult>(result.Result);
+			Assert.NotInRange<int>(response.StatusCode.GetValueOrDefault(), 400, 599);
 		}
 
 		[Fact]
@@ -41,7 +43,8 @@ namespace Books.Tests.Controllers
 
 			var result = await _sut.Create(request);
 
-			Assert.NotNull(result);
+			var response = Assert.IsType<OkObjectResult>(result.Result);
+			Assert.NotInRange<int>(response.StatusCode.GetValueOrDefault(), 400, 599);
 		}
 
 		[Fact]
@@ -53,7 +56,8 @@ namespace Books.Tests.Controllers
 
 			var result = await _sut.Update(request);
 
-			Assert.NotNull(result);
+			var response = Assert.IsType<OkObjectResult>(result.Result);
+			Assert.NotInRange<int>(response.StatusCode.GetValueOrDefault(), 400, 599);
 		}
 
 		[Fact]
@@ -65,7 +69,8 @@ namespace Books.Tests.Controllers
 
 			var result = await _sut.Delete(id);
 
-			Assert.NotNull(result);
+			var response = Assert.IsType<OkObjectResult>(result.Result);
+			Assert.NotInRange<int>(response.StatusCode.GetValueOrDefault(), 400, 599);
 		}
 	}
 }

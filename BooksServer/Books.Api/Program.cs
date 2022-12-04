@@ -1,3 +1,4 @@
+using Books.Api.Extensions;
 using Books.BusinessLogic.MappingProfiles;
 using Books.BusinessLogic.Requests;
 using Books.DataAccessLayer;
@@ -11,10 +12,14 @@ using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
+builder.Host.ConfigureLogging(logging =>
+{
+	logging.ClearProviders();
+	logging.AddConsole();
+});
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
@@ -54,6 +59,9 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
+
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+app.ConfigureExceptionHandler(logger);
 
 app.UseHttpsRedirection();
 

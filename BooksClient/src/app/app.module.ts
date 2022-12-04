@@ -14,6 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BadgeModule } from 'primeng/badge';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 
@@ -43,6 +44,7 @@ import { RelatedDataService } from './services/related.data.service';
     FormsModule,
     ConfirmDialogModule,
     BrowserAnimationsModule,
+    BadgeModule,
   ],
   providers: [
     BookService,

@@ -24,6 +24,7 @@ namespace Books.BusinessLogic.RequestHandlers
 
 			if (request.AuthorId.HasValue)
 			{
+				book.Author = null;
 				book.AuthorId = request.AuthorId.Value;
 			}
 			else

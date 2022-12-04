@@ -31,15 +31,15 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="name" style="min-width: 15rem">
+        <th pSortableColumn="name" style="min-width: 20vw">
           Name <p-sortIcon field="name"></p-sortIcon>
         </th>
-        <th pSortableColumn="author.name" style="min-width: 15rem">
+        <th pSortableColumn="author.name" style="min-width: 20vw">
           Author <p-sortIcon field="author.name"></p-sortIcon>
         </th>
         <th>Genre</th>
-        <th style="min-width: 10rem">Status</th>
-        <th></th>
+        <th style="min-width: 18vw">Status</th>
+        <th style="min-width: 20vw"></th>
       </tr>
       <tr>
         <th>
@@ -60,20 +60,33 @@
         <td>{{ book.name }}</td>
         <td>{{ book.author?.name }}</td>
         <td>{{ book.genre?.name }}</td>
-        <td>{{ book.status?.name }}</td>
         <td>
+          <p-badge
+            [value]="book.status?.name"
+            [severity]="getStatusSeverity(book.status?.name)"
+          ></p-badge>
+        </td>
+        <td>
+          <button
+            *ngIf="!!book.notes"
+            pButton
+            pRipple
+            icon="pi pi-book"
+            class="p-button-rounded p-button-warning mr-3"
+            (click)="showNotes(book.notes)"
+          ></button>
           <button
             pButton
             pRipple
             icon="pi pi-pencil"
-            class="p-button-rounded p-button-success mr-2"
+            class="p-button-rounded p-button-success mr-3"
             (click)="editBook(book)"
           ></button>
           <button
             pButton
             pRipple
             icon="pi pi-trash"
-            class="p-button-rounded p-button-danger"
+            class="p-button-rounded p-button-danger mr-3"
             (click)="deleteBook(book.id)"
           ></button>
         </td>
@@ -89,3 +102,9 @@
   (tableUpdate)="onTableUpdate()"
 >
 </app-book-update-modal>
+
+<p-dialog header="Notes" [(visible)]="displayNotes" [modal]="true">
+  <p *ngFor="let row of selectedBookNotesRows">
+    {{ row }}
+  </p>
+</p-dialog>

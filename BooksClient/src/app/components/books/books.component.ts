@@ -16,6 +16,8 @@ export class BooksComponent implements OnInit {
   public statuses!: KeyValue[];
   public selectedBook!: Book;
   dialogVisible: boolean = false;
+  displayNotes: boolean = false;
+  selectedBookNotesRows: string[] = [];
 
   constructor(
     private bookService: BookService,
@@ -40,6 +42,11 @@ export class BooksComponent implements OnInit {
     this.dialogVisible = false;
   }
 
+  showNotes(notes: string) {
+    this.selectedBookNotesRows = notes.split('\n');
+    this.displayNotes = true;
+  }
+
   openNew() {
     this.selectedBook = {};
     this.dialogVisible = true;
@@ -62,5 +69,17 @@ export class BooksComponent implements OnInit {
         });
       },
     });
+  }
+
+  getStatusSeverity(status: string) {
+    if (status === 'Unknown') {
+      return 'danger';
+    } else if (status === 'Planning to read') {
+      return 'warning';
+    } else if (status === 'Currently reading') {
+      return 'info';
+    } else {
+      return 'success';
+    }
   }
 }
