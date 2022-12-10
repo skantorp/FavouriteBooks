@@ -1,7 +1,8 @@
 ﻿using AutoFixture;
 using Books.Api.Controllers;
+using Books.BusinessLogic.Commands;
 using Books.BusinessLogic.DTOs;
-using Books.BusinessLogic.Requests;
+using Books.BusinessLogic.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
@@ -30,7 +31,7 @@ namespace Books.Tests.Controllers
 			var result = await _sut.Get();
 
 			var response = Assert.IsType<OkObjectResult>(result.Result);
-			Assert.NotInRange<int>(response.StatusCode.GetValueOrDefault(), 400, 599);
+			Assert.NotInRange(response.StatusCode.GetValueOrDefault(), 400, 599);
 		}
 
 		[Fact]
@@ -44,7 +45,7 @@ namespace Books.Tests.Controllers
 			var result = await _sut.Create(request);
 
 			var response = Assert.IsType<OkObjectResult>(result.Result);
-			Assert.NotInRange<int>(response.StatusCode.GetValueOrDefault(), 400, 599);
+			Assert.NotInRange(response.StatusCode.GetValueOrDefault(), 400, 599);
 		}
 
 		[Fact]
@@ -57,7 +58,7 @@ namespace Books.Tests.Controllers
 			var result = await _sut.Update(request);
 
 			var response = Assert.IsType<OkObjectResult>(result.Result);
-			Assert.NotInRange<int>(response.StatusCode.GetValueOrDefault(), 400, 599);
+			Assert.NotInRange(response.StatusCode.GetValueOrDefault(), 400, 599);
 		}
 
 		[Fact]
@@ -70,7 +71,7 @@ namespace Books.Tests.Controllers
 			var result = await _sut.Delete(id);
 
 			var response = Assert.IsType<OkObjectResult>(result.Result);
-			Assert.NotInRange<int>(response.StatusCode.GetValueOrDefault(), 400, 599);
+			Assert.NotInRange(response.StatusCode.GetValueOrDefault(), 400, 599);
 		}
 	}
 }

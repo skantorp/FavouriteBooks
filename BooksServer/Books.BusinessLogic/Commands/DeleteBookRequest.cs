@@ -1,10 +1,14 @@
-﻿using Books.BusinessLogic.Requests;
-using Books.DataAccessLayer.Entities;
+﻿using Books.DataAccessLayer.Entities;
 using Books.DataAccessLayer.Interfaces;
 using MediatR;
 
-namespace Books.BusinessLogic.RequestHandlers
+namespace Books.BusinessLogic.Commands
 {
+	public class DeleteBookRequest : IRequest<Guid>
+	{
+		public Guid Id { get; set; }
+	}
+
 	public class DeleteBookRequestHandler : IRequestHandler<DeleteBookRequest, Guid>
 	{
 		private readonly IRepository<Book> _bookRepository;

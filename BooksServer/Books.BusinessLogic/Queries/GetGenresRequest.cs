@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
 using Books.BusinessLogic.DTOs;
-using Books.BusinessLogic.Requests;
 using Books.DataAccessLayer.Entities;
 using Books.DataAccessLayer.Interfaces;
 using MediatR;
 
-namespace Books.BusinessLogic.RequestHandlers
+namespace Books.BusinessLogic.Queries
 {
+	public class GetGenresRequest : IRequest<List<DictionaryDTO>>
+	{
+	}
+
 	public class GetGenresRequestHandler : IRequestHandler<GetGenresRequest, List<DictionaryDTO>>
 	{
 		private readonly IRepository<Genre> _genreRepository;

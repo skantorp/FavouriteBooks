@@ -1,10 +1,19 @@
-﻿using Books.BusinessLogic.Requests;
-using Books.DataAccessLayer.Entities;
+﻿using Books.DataAccessLayer.Entities;
 using Books.DataAccessLayer.Interfaces;
 using MediatR;
 
-namespace Books.BusinessLogic.RequestHandlers
+namespace Books.BusinessLogic.Commands
 {
+	public class CreateBookRequest : IRequest<Guid>
+	{
+		public string Name { get; set; }
+		public string? Notes { get; set; }
+		public Guid? AuthorId { get; set; }
+		public string? AuthorName { get; set; }
+		public Guid GenreId { get; set; }
+		public Guid StatusId { get; set; }
+	}
+
 	public class CreateBookRequestHandler : IRequestHandler<CreateBookRequest, Guid>
 	{
 		private readonly IRepository<Book> _bookRepository;
@@ -26,7 +35,7 @@ namespace Books.BusinessLogic.RequestHandlers
 
 			if (request.AuthorId.HasValue)
 			{
-				newBook.AuthorId = request.AuthorId.Value;	
+				newBook.AuthorId = request.AuthorId.Value;
 			}
 			else
 			{

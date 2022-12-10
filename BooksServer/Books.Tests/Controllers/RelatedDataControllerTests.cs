@@ -1,7 +1,7 @@
 ﻿using AutoFixture;
 using Books.Api.Controllers;
 using Books.BusinessLogic.DTOs;
-using Books.BusinessLogic.Requests;
+using Books.BusinessLogic.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
