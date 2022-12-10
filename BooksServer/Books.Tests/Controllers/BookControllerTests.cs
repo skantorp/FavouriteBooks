@@ -38,7 +38,7 @@ namespace Books.Tests.Controllers
 		public async Task CreateTest()
 		{
 			var id = _fixture.Create<Guid>();
-			var request = _fixture.Create<CreateBookRequest>();
+			var request = _fixture.Create<CreateBook>();
 			_mediator.Send(request).Returns(id);
 			_sut = new BooksController(_mediator);
 
@@ -51,7 +51,7 @@ namespace Books.Tests.Controllers
 		[Fact]
 		public async Task UpdateTest()
 		{
-			var request = _fixture.Create<UpdateBookRequest>();
+			var request = _fixture.Create<UpdateBook>();
 			_mediator.Send(request).Returns(request.Id);
 			_sut = new BooksController(_mediator);
 

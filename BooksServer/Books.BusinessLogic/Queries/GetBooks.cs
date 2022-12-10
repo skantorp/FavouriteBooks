@@ -6,22 +6,22 @@ using MediatR;
 
 namespace Books.BusinessLogic.Queries
 {
-	public class GetAllBooksRequest : IRequest<List<BookDTO>>
+	public class GetAllBooks : IRequest<List<BookDTO>>
 	{
 	}
 
-	public class GetAllBooksRequestHandler : IRequestHandler<GetAllBooksRequest, List<BookDTO>>
+	public class GetAllBooksHandler : IRequestHandler<GetAllBooks, List<BookDTO>>
 	{
 		private readonly IRepository<Book> _bookRepository;
 		private readonly IMapper _mapper;
 
-		public GetAllBooksRequestHandler(IRepository<Book> bookRepository, IMapper mapper)
+		public GetAllBooksHandler(IRepository<Book> bookRepository, IMapper mapper)
 		{
 			_bookRepository = bookRepository;
 			_mapper = mapper;
 		}
 
-		public async Task<List<BookDTO>> Handle(GetAllBooksRequest request, CancellationToken cancellationToken)
+		public async Task<List<BookDTO>> Handle(GetAllBooks request, CancellationToken cancellationToken)
 		{
 			var books = await _bookRepository.GetAll();
 			return _mapper.Map<List<BookDTO>>(books);

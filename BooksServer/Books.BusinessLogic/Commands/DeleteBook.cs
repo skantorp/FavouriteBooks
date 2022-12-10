@@ -4,21 +4,21 @@ using MediatR;
 
 namespace Books.BusinessLogic.Commands
 {
-	public class DeleteBookRequest : IRequest<Guid>
+	public class DeleteBook : IRequest<Guid>
 	{
 		public Guid Id { get; set; }
 	}
 
-	public class DeleteBookRequestHandler : IRequestHandler<DeleteBookRequest, Guid>
+	public class DeleteBookHandler : IRequestHandler<DeleteBook, Guid>
 	{
 		private readonly IRepository<Book> _bookRepository;
 
-		public DeleteBookRequestHandler(IRepository<Book> bookRepository)
+		public DeleteBookHandler(IRepository<Book> bookRepository)
 		{
 			_bookRepository = bookRepository;
 		}
 
-		public async Task<Guid> Handle(DeleteBookRequest request, CancellationToken cancellationToken)
+		public async Task<Guid> Handle(DeleteBook request, CancellationToken cancellationToken)
 		{
 			var bookToDelete = await _bookRepository.GetOne(x => x.Id == request.Id);
 			await _bookRepository.Remove(bookToDelete);

@@ -115,6 +115,17 @@ namespace Books.DataAccessLayer
 					AuthorId = new Guid("B776DB53-A7DB-487A-82A4-A959FA56C58D")
 				}
 			);
+
+			builder.Entity<User>().HasData(
+				new User
+				{
+					Id = new Guid("AF79443A-7C9E-43A5-8A3B-E86FF303F512"),
+					Name = "Yaroslav Melnyk",
+					Username = "user",
+					Password = "y/YjOg4ktWpidOPQ50PiE7RVTvckCG5pnEgX0+Y8P7T9+m8+nW0yOUvCAGaCra/cq4FkI9JcKk53hO52GuDfoA==",
+					Salt = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+				}
+			);
 		}
 	}
 }

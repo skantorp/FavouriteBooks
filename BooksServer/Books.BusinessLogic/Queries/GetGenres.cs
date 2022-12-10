@@ -6,22 +6,22 @@ using MediatR;
 
 namespace Books.BusinessLogic.Queries
 {
-	public class GetGenresRequest : IRequest<List<DictionaryDTO>>
+	public class GetGenres : IRequest<List<DictionaryDTO>>
 	{
 	}
 
-	public class GetGenresRequestHandler : IRequestHandler<GetGenresRequest, List<DictionaryDTO>>
+	public class GetGenresHandler : IRequestHandler<GetGenres, List<DictionaryDTO>>
 	{
 		private readonly IRepository<Genre> _genreRepository;
 		private readonly IMapper _mapper;
 
-		public GetGenresRequestHandler(IRepository<Genre> genreRepository, IMapper mapper)
+		public GetGenresHandler(IRepository<Genre> genreRepository, IMapper mapper)
 		{
 			_genreRepository = genreRepository;
 			_mapper = mapper;
 		}
 
-		public async Task<List<DictionaryDTO>> Handle(GetGenresRequest request, CancellationToken cancellationToken)
+		public async Task<List<DictionaryDTO>> Handle(GetGenres request, CancellationToken cancellationToken)
 		{
 			var genres = await _genreRepository.GetAll();
 			return _mapper.Map<List<DictionaryDTO>>(genres);

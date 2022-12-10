@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Books.BusinessLogic.Commands
 {
-	public class UpdateBookRequest : IRequest<Guid>
+	public class UpdateBook : IRequest<Guid>
 	{
 		public Guid Id { get; set; }
 		public string Name { get; set; }
@@ -15,16 +15,16 @@ namespace Books.BusinessLogic.Commands
 		public Guid StatusId { get; set; }
 	}
 
-	public class UpdateBookRequestHandler : IRequestHandler<UpdateBookRequest, Guid>
+	public class UpdateBookHandler : IRequestHandler<UpdateBook, Guid>
 	{
 		private readonly IRepository<Book> _bookRepository;
 
-		public UpdateBookRequestHandler(IRepository<Book> bookRepository)
+		public UpdateBookHandler(IRepository<Book> bookRepository)
 		{
 			_bookRepository = bookRepository;
 		}
 
-		public async Task<Guid> Handle(UpdateBookRequest request, CancellationToken cancellationToken)
+		public async Task<Guid> Handle(UpdateBook request, CancellationToken cancellationToken)
 		{
 			var book = await _bookRepository.GetOne(x => x.Id == request.Id);
 			book.Name = request.Name;

@@ -24,7 +24,7 @@ namespace Books.Tests.Controllers
 		public async Task GetAuthorsTest()
 		{
 			var list = _fixture.Create<List<DictionaryDTO>>();
-			_mediator.Send(new GetAuthorsRequest()).Returns(list);
+			_mediator.Send(new GetAuthors()).Returns(list);
 			_sut = new RelatedDataController(_mediator);
 
 			var result = await _sut.GetAuthors();
@@ -37,7 +37,7 @@ namespace Books.Tests.Controllers
 		public async Task GetGenresTest()
 		{
 			var list = _fixture.Create<List<DictionaryDTO>>();
-			_mediator.Send(new GetGenresRequest()).Returns(list);
+			_mediator.Send(new GetGenres()).Returns(list);
 			_sut = new RelatedDataController(_mediator);
 
 			var result = await _sut.GetGenres();
@@ -50,7 +50,7 @@ namespace Books.Tests.Controllers
 		public async Task GetStatusesTest()
 		{
 			var list = _fixture.Create<List<DictionaryDTO>>();
-			_mediator.Send(new GetStatusesRequest()).Returns(list);
+			_mediator.Send(new GetStatuses()).Returns(list);
 			_sut = new RelatedDataController(_mediator);
 
 			var result = await _sut.GetStatuses();

@@ -3,6 +3,7 @@ import { Guid } from 'guid-typescript';
 import { MessageService } from 'primeng/api';
 import { Book } from 'src/app/models/book';
 import { KeyValue } from 'src/app/models/keyvalue';
+import { AuthService } from 'src/app/services/auth.service';
 import { BookService } from 'src/app/services/book.service';
 import { RelatedDataService } from 'src/app/services/related.data.service';
 
@@ -22,7 +23,8 @@ export class BooksComponent implements OnInit {
   constructor(
     private bookService: BookService,
     private messageService: MessageService,
-    private relatedDataService: RelatedDataService
+    private relatedDataService: RelatedDataService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -81,5 +83,9 @@ export class BooksComponent implements OnInit {
     } else {
       return 'success';
     }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

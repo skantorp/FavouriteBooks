@@ -18,7 +18,7 @@
     [showCurrentPageReport]="true"
   >
     <ng-template pTemplate="caption">
-      <div class="flex align-items-center justify-content-between">
+      <div>
         <button
           pButton
           pRipple
@@ -27,19 +27,25 @@
           class="p-button-success mr-2"
           (click)="openNew()"
         ></button>
+        <button
+          pButton
+          label="Logout"
+          class="p-button-danger mr-2 logout-button"
+          (click)="logout()"
+        ></button>
       </div>
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="name" style="min-width: 20vw">
+        <th pSortableColumn="name" class="th-20">
           Name <p-sortIcon field="name"></p-sortIcon>
         </th>
-        <th pSortableColumn="author.name" style="min-width: 20vw">
+        <th pSortableColumn="author.name" class="th-20">
           Author <p-sortIcon field="author.name"></p-sortIcon>
         </th>
         <th>Genre</th>
-        <th style="min-width: 18vw">Status</th>
-        <th style="min-width: 20vw"></th>
+        <th class="th-18">Status</th>
+        <th class="th-20"></th>
       </tr>
       <tr>
         <th>
