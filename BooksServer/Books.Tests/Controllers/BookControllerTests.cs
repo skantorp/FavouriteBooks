@@ -25,7 +25,7 @@ namespace Books.Tests.Controllers
 		public async Task GetTest()
 		{
 			var list = _fixture.Create<List<BookDTO>>();
-			_mediator.Send(new GetAllBooksRequest()).Returns(list);
+			_mediator.Send(new GetAllBooks()).Returns(list);
 			_sut = new BooksController(_mediator);
 
 			var result = await _sut.Get();
